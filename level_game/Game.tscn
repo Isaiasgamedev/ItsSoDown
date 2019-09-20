@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Tileset/tileset4.tres" type="TileSet" id=1]
+[ext_resource path="res://level_game/TileMap.gd" type="Script" id=2]
+[ext_resource path="res://assets/parallax/teste.png" type="Texture" id=3]
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objetos_de_cenario/bloco.tscn" type="PackedScene" id=5]
+[ext_resource path="res://level_game/saida.gd" type="Script" id=6]
+[ext_resource path="res://level_game/win.png" type="Texture" id=7]
+[ext_resource path="res://level_game/black.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30.9167, 63.381 )
+
+[node name="Game" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( -1, 4, 0, -65536, 4, 0, -65535, 4, 0, -65534, 4, 0, -65533, 4, 0, -65532, 4, 0, -65531, 4, 0, -65530, 4, 0, -65529, 4, 0, -65528, 4, 0, -65527, 4, 0, -65526, 4, 0, -65525, 4, 0, -65524, 4, 0, 65535, 4, 0, 12, 4, 0, 131071, 4, 0, 65548, 4, 0, 196607, 4, 0, 131084, 4, 0, 262143, 4, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 2, 0, 196620, 4, 0, 327679, 4, 0, 262156, 4, 0, 393215, 4, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 4, 0, 458751, 4, 0, 393228, 4, 0, 524287, 4, 0, 458764, 4, 0, 589823, 4, 0, 524288, 0, 0, 524289, 2, 0, 524292, 3, 0, 524293, 0, 0, 524294, 0, 0, 524295, 2, 0, 524297, 3, 0, 524298, 0, 0, 524299, 0, 0, 524300, 4, 0, 655359, 4, 0, 589836, 4, 0, 720895, 4, 0, 655372, 4, 0, 786431, 4, 0, 720904, 3, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 720908, 4, 0, 851967, 4, 0, 786444, 4, 0, 917503, 4, 0, 851974, 1, 0, 851980, 4, 0, 983039, 4, 0, 917516, 4, 0, 1048575, 4, 0, 983045, 1, 0, 983052, 4, 0, 1114111, 4, 0, 1048588, 4, 0, 1179647, 4, 0, 1114118, 1, 0, 1114124, 4, 0, 1245183, 4, 0, 1179660, 4, 0, 1310719, 4, 0, 1245191, 1, 0, 1245196, 4, 0, 1376255, 4, 0, 1310732, 4, 0, 1441791, 4, 0, 1376261, 3, 0, 1376262, 2, 0, 1376268, 4, 0, 1507327, 4, 0, 1441804, 4, 0, 1572863, 4, 0, 1507331, 3, 0, 1507332, 2, 0, 1507340, 4, 0, 1638399, 4, 0, 1572876, 4, 0, 1703935, 4, 0, 1638401, 3, 0, 1638402, 2, 0, 1638412, 4, 0, 1769471, 4, 0, 1835007, 4, 0, 1900543, 4, 0, 1835008, 0, 0, 1835009, 0, 0, 1835010, 0, 0, 1835011, 0, 0, 1835012, 0, 0, 1835013, 0, 0, 1835014, 0, 0, 1835015, 0, 0, 1835016, 0, 0, 1835017, 0, 0, 1835018, 0, 0, 1835019, 0, 0, 1835020, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+editor/display_folded = true
+scale = Vector2( 10, 10 )
+transform = Transform2D( 10, 0, 0, 10, 0, 0 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 0 )
+motion_mirroring = Vector2( 64, 64 )
+
+[node name="sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 83, 33 )
+
+[node name="bloco" parent="." instance=ExtResource( 5 )]
+
+[node name="saida" type="Area2D" parent="."]
+position = Vector2( 802.187, 1716.37 )
+script = ExtResource( 6 )
+
+[node name="win" type="Sprite" parent="saida"]
+visible = false
+position = Vector2( -363.281, -237.232 )
+scale = Vector2( 0.781896, 0.781895 )
+z_index = 1
+texture = ExtResource( 7 )
+
+[node name="shape" type="CollisionShape2D" parent="saida"]
+position = Vector2( -2.70129, 11.7013 )
+shape = SubResource( 1 )
+
+[node name="black" type="Sprite" parent="saida"]
+visible = false
+position = Vector2( 2506.22, 1806.68 )
+scale = Vector2( 8.50474, 8.50474 )
+texture = ExtResource( 8 )
+[connection signal="body_entered" from="saida" to="saida" method="_on_saida_body_entered"]
